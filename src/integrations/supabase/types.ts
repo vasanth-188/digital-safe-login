@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      phishing_scans: {
+        Row: {
+          analysis_details: Json
+          confidence_score: number | null
+          created_at: string
+          id: string
+          indicators: Json | null
+          input_content: string
+          risk_level: string
+          scan_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          analysis_details?: Json
+          confidence_score?: number | null
+          created_at?: string
+          id?: string
+          indicators?: Json | null
+          input_content: string
+          risk_level: string
+          scan_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          analysis_details?: Json
+          confidence_score?: number | null
+          created_at?: string
+          id?: string
+          indicators?: Json | null
+          input_content?: string
+          risk_level?: string
+          scan_type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string

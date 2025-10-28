@@ -1,1 +1,4 @@
 project_id = "oonwuvvmvhawtmlzguju"
+
+[functions.phishing-detection]
+verify_jwt = true
