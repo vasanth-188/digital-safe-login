@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, TrendingUp, Clock, CheckCircle } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Shield, TrendingUp, Clock, CheckCircle, BarChart3, History, ScanIcon } from "lucide-react";
 import PhishingScanner from "@/components/PhishingScanner";
 import ScanHistory from "@/components/ScanHistory";
+import { PhishingAnalytics } from "@/components/PhishingAnalytics";
 import { usePhishingScanner } from "@/hooks/usePhishingScanner";
 
 export default function Index() {
@@ -117,9 +119,34 @@ export default function Index() {
           </Card>
         </div>
 
-        <PhishingScanner />
+        <Tabs defaultValue="scanner" className="space-y-8">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-3">
+            <TabsTrigger value="scanner">
+              <ScanIcon className="h-4 w-4 mr-2" />
+              Scanner
+            </TabsTrigger>
+            <TabsTrigger value="analytics">
+              <BarChart3 className="h-4 w-4 mr-2" />
+              Analytics
+            </TabsTrigger>
+            <TabsTrigger value="history">
+              <History className="h-4 w-4 mr-2" />
+              History
+            </TabsTrigger>
+          </TabsList>
 
-        <ScanHistory />
+          <TabsContent value="scanner">
+            <PhishingScanner />
+          </TabsContent>
+
+          <TabsContent value="analytics">
+            <PhishingAnalytics />
+          </TabsContent>
+
+          <TabsContent value="history">
+            <ScanHistory />
+          </TabsContent>
+        </Tabs>
       </main>
     </div>
   );
