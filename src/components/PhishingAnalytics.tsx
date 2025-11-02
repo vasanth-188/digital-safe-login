@@ -4,8 +4,6 @@ import { usePhishingScanner, PhishingScan } from "@/hooks/usePhishingScanner";
 import {
   LineChart,
   Line,
-  PieChart,
-  Pie,
   BarChart,
   Bar,
   XAxis,
@@ -156,7 +154,7 @@ export function PhishingAnalytics() {
           </CardContent>
         </Card>
 
-        {/* Risk Distribution Pie Chart */}
+        {/* Risk Distribution Horizontal Bar Chart */}
         <Card>
           <CardHeader>
             <CardTitle>Risk Level Distribution</CardTitle>
@@ -164,30 +162,39 @@ export function PhishingAnalytics() {
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={riskDistribution}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={({ name, percent }) =>
-                    `${name}: ${(percent * 100).toFixed(0)}%`
-                  }
-                  outerRadius={100}
-                  dataKey="value"
-                >
-                  {riskDistribution.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.fill} />
-                  ))}
-                </Pie>
+              <BarChart 
+                data={riskDistribution} 
+                layout="vertical"
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                <XAxis 
+                  type="number" 
+                  className="text-xs"
+                  stroke="hsl(var(--muted-foreground))"
+                />
+                <YAxis 
+                  dataKey="name" 
+                  type="category" 
+                  width={80}
+                  className="text-xs"
+                  stroke="hsl(var(--muted-foreground))"
+                />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: "hsl(var(--card))",
                     border: "1px solid hsl(var(--border))",
                     borderRadius: "var(--radius)",
                   }}
+                  labelStyle={{ color: "hsl(var(--card-foreground))" }}
                 />
-              </PieChart>
+                <Legend />
+                <Bar dataKey="value" name="Number of Scans" radius={[0, 8, 8, 0]}>
+                  {riskDistribution.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.fill} />
+                  ))}
+                </Bar>
+              </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
