@@ -125,6 +125,7 @@ export function PhishingAnalytics() {
                   dataKey="date" 
                   className="text-xs"
                   stroke="hsl(var(--muted-foreground))"
+                  label={{ value: "Confidence Score", position: "insideBottom", offset: -5 }}
                 />
                 <YAxis 
                   domain={[0, 100]}
@@ -207,16 +208,24 @@ export function PhishingAnalytics() {
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={confidenceDistribution}>
+              <BarChart 
+                data={confidenceDistribution} 
+                layout="vertical"
+                margin={{ top: 5, right: 30, left: 80, bottom: 5 }}
+              >
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                 <XAxis 
-                  dataKey="range"
+                  type="number"
                   className="text-xs"
                   stroke="hsl(var(--muted-foreground))"
+                  label={{ value: "Number of Scans", position: "insideBottom", offset: -5 }}
                 />
                 <YAxis 
+                  dataKey="range"
+                  type="category"
                   className="text-xs"
                   stroke="hsl(var(--muted-foreground))"
+                  label={{ value: "Confidence Score", angle: -90, position: "insideLeft" }}
                 />
                 <Tooltip
                   contentStyle={{
@@ -226,7 +235,7 @@ export function PhishingAnalytics() {
                   }}
                   labelStyle={{ color: "hsl(var(--card-foreground))" }}
                 />
-                <Bar dataKey="count" name="Number of Scans" radius={[8, 8, 0, 0]}>
+                <Bar dataKey="count" name="Number of Scans" radius={[0, 8, 8, 0]}>
                   {confidenceDistribution.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.fill} />
                   ))}

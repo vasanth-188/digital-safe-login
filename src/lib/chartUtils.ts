@@ -32,7 +32,7 @@ export interface AggregatedData {
 export const chartColors = {
   safe: "hsl(142, 76%, 36%)",
   low: "hsl(45, 93%, 47%)",
-  medium: "hsl(25, 95%, 53%)",
+  medium: "hsl(217, 91%, 60%)",
   high: "hsl(0, 84%, 60%)",
   critical: "hsl(0, 63%, 31%)",
 };
