@@ -140,7 +140,7 @@ export function PhishingAnalytics() {
                   }}
                   labelStyle={{ color: "hsl(var(--card-foreground))" }}
                 />
-                <Legend />
+                <Legend verticalAlign="bottom" height={36} />
                 <Line
                   type="monotone"
                   dataKey="confidence"
