@@ -1,67 +1,49 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { usePhishingScanner, PhishingScan } from "@/hooks/usePhishingScanner";
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  Cell,
-} from "recharts";
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from "recharts";
 import { processScansForCharts, calculateInsights, chartColors } from "@/lib/chartUtils";
 import { TrendingUp, Target, Shield, Activity } from "lucide-react";
-
 export function PhishingAnalytics() {
-  const { getScanHistory } = usePhishingScanner();
+  const {
+    getScanHistory
+  } = usePhishingScanner();
   const [scans, setScans] = useState<PhishingScan[]>([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     loadAnalytics();
   }, []);
-
   const loadAnalytics = async () => {
     setLoading(true);
     const history = await getScanHistory();
     setScans(history);
     setLoading(false);
   };
-
   if (loading) {
-    return (
-      <Card>
+    return <Card>
         <CardContent className="pt-6">
           <div className="flex items-center justify-center h-64">
             <p className="text-muted-foreground">Loading analytics...</p>
           </div>
         </CardContent>
-      </Card>
-    );
+      </Card>;
   }
-
   if (scans.length === 0) {
-    return (
-      <Card>
+    return <Card>
         <CardContent className="pt-6">
           <div className="flex items-center justify-center h-64">
             <p className="text-muted-foreground">No scan data available. Perform some scans to see analytics.</p>
           </div>
         </CardContent>
-      </Card>
-    );
+      </Card>;
   }
-
-  const { riskDistribution, confidenceTrend, confidenceDistribution } = processScansForCharts(scans);
+  const {
+    riskDistribution,
+    confidenceTrend,
+    confidenceDistribution
+  } = processScansForCharts(scans);
   const insights = calculateInsights(scans);
-
-  return (
-    <div className="space-y-6">
+  return <div className="space-y-6">
       {/* Insights Cards */}
       <div className="grid gap-4 md:grid-cols-4">
         <Card>
@@ -119,38 +101,7 @@ export function PhishingAnalytics() {
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={confidenceTrend.slice().reverse()}>
-                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                <XAxis 
-                  dataKey="date" 
-                  className="text-xs"
-                  stroke="hsl(var(--muted-foreground))"
-                  label={{ value: "Confidence Score", position: "insideBottom", offset: -5 }}
-                />
-                <YAxis 
-                  domain={[0, 100]}
-                  className="text-xs"
-                  stroke="hsl(var(--muted-foreground))"
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "hsl(var(--card))",
-                    border: "1px solid hsl(var(--border))",
-                    borderRadius: "var(--radius)",
-                  }}
-                  labelStyle={{ color: "hsl(var(--card-foreground))" }}
-                />
-                <Legend verticalAlign="bottom" height={36} />
-                <Line
-                  type="monotone"
-                  dataKey="confidence"
-                  stroke="hsl(var(--primary))"
-                  strokeWidth={2}
-                  dot={{ fill: "hsl(var(--primary))", r: 4 }}
-                  activeDot={{ r: 6 }}
-                  name="Confidence %"
-                />
-              </LineChart>
+              
             </ResponsiveContainer>
           </CardContent>
         </Card>
@@ -163,37 +114,25 @@ export function PhishingAnalytics() {
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart 
-                data={riskDistribution} 
-                layout="vertical"
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
+              <BarChart data={riskDistribution} layout="vertical" margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5
+            }}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                <XAxis 
-                  type="number" 
-                  className="text-xs"
-                  stroke="hsl(var(--muted-foreground))"
-                />
-                <YAxis 
-                  dataKey="name" 
-                  type="category" 
-                  width={80}
-                  className="text-xs"
-                  stroke="hsl(var(--muted-foreground))"
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "hsl(var(--card))",
-                    border: "1px solid hsl(var(--border))",
-                    borderRadius: "var(--radius)",
-                  }}
-                  labelStyle={{ color: "hsl(var(--card-foreground))" }}
-                />
+                <XAxis type="number" className="text-xs" stroke="hsl(var(--muted-foreground))" />
+                <YAxis dataKey="name" type="category" width={80} className="text-xs" stroke="hsl(var(--muted-foreground))" />
+                <Tooltip contentStyle={{
+                backgroundColor: "hsl(var(--card))",
+                border: "1px solid hsl(var(--border))",
+                borderRadius: "var(--radius)"
+              }} labelStyle={{
+                color: "hsl(var(--card-foreground))"
+              }} />
                 <Legend />
                 <Bar dataKey="value" name="Number of Scans" radius={[0, 8, 8, 0]}>
-                  {riskDistribution.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.fill} />
-                  ))}
+                  {riskDistribution.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.fill} />)}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
@@ -208,45 +147,37 @@ export function PhishingAnalytics() {
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart 
-                data={confidenceDistribution}
-                margin={{ top: 5, right: 30, left: 20, bottom: 70 }}
-              >
+              <BarChart data={confidenceDistribution} margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 70
+            }}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                <XAxis 
-                  dataKey="range"
-                  type="category"
-                  className="text-xs"
-                  stroke="hsl(var(--muted-foreground))"
-                  angle={-45}
-                  textAnchor="end"
-                  height={60}
-                  label={{ value: "Confidence Score", position: "insideBottom", offset: -10 }}
-                />
-                <YAxis 
-                  type="number"
-                  className="text-xs"
-                  stroke="hsl(var(--muted-foreground))"
-                  label={{ value: "Number of Scans", position: "insideLeft", angle: -90 }}
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "hsl(var(--card))",
-                    border: "1px solid hsl(var(--border))",
-                    borderRadius: "var(--radius)",
-                  }}
-                  labelStyle={{ color: "hsl(var(--card-foreground))" }}
-                />
+                <XAxis dataKey="range" type="category" className="text-xs" stroke="hsl(var(--muted-foreground))" angle={-45} textAnchor="end" height={60} label={{
+                value: "Confidence Score",
+                position: "insideBottom",
+                offset: -10
+              }} />
+                <YAxis type="number" className="text-xs" stroke="hsl(var(--muted-foreground))" label={{
+                value: "Number of Scans",
+                position: "insideLeft",
+                angle: -90
+              }} />
+                <Tooltip contentStyle={{
+                backgroundColor: "hsl(var(--card))",
+                border: "1px solid hsl(var(--border))",
+                borderRadius: "var(--radius)"
+              }} labelStyle={{
+                color: "hsl(var(--card-foreground))"
+              }} />
                 <Bar dataKey="count" name="Number of Scans" radius={[8, 8, 0, 0]}>
-                  {confidenceDistribution.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.fill} />
-                  ))}
+                  {confidenceDistribution.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.fill} />)}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 }
