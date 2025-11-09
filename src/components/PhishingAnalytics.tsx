@@ -101,36 +101,34 @@ export function PhishingAnalytics() {
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={confidenceTrend} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+              <LineChart data={confidenceTrend} margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5
+            }}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                <XAxis 
-                  dataKey="date" 
-                  className="text-xs" 
-                  stroke="hsl(var(--muted-foreground))"
-                  label={{ value: "Scan Date", position: "insideBottom", offset: -5 }}
-                />
-                <YAxis 
-                  className="text-xs" 
-                  stroke="hsl(var(--muted-foreground))"
-                  label={{ value: "Confidence Score (%)", angle: -90, position: "insideLeft" }}
-                />
-                <Tooltip 
-                  contentStyle={{
-                    backgroundColor: "hsl(var(--card))",
-                    border: "1px solid hsl(var(--border))",
-                    borderRadius: "var(--radius)"
-                  }}
-                  labelStyle={{ color: "hsl(var(--card-foreground))" }}
-                />
-                <Legend verticalAlign="bottom" height={36} />
-                <Line 
-                  type="monotone" 
-                  dataKey="confidence" 
-                  stroke={chartColors.high}
-                  strokeWidth={2}
-                  name="Confidence Score"
-                  dot={{ fill: chartColors.high }}
-                />
+                <XAxis dataKey="date" className="text-xs" stroke="hsl(var(--muted-foreground))" label={{
+                value: "Scan Date",
+                position: "insideBottom",
+                offset: -5
+              }} />
+                <YAxis className="text-xs" stroke="hsl(var(--muted-foreground))" label={{
+                value: "Confidence Score (%)",
+                angle: -90,
+                position: "insideLeft"
+              }} />
+                <Tooltip contentStyle={{
+                backgroundColor: "hsl(var(--card))",
+                border: "1px solid hsl(var(--border))",
+                borderRadius: "var(--radius)"
+              }} labelStyle={{
+                color: "hsl(var(--card-foreground))"
+              }} />
+                <Legend verticalAlign="bottom" height={36} className="my-px" />
+                <Line type="monotone" dataKey="confidence" stroke={chartColors.high} strokeWidth={2} name="Confidence Score" dot={{
+                fill: chartColors.high
+              }} />
               </LineChart>
             </ResponsiveContainer>
           </CardContent>
@@ -151,20 +149,16 @@ export function PhishingAnalytics() {
               bottom: 5
             }}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                <XAxis 
-                  type="number" 
-                  className="text-xs" 
-                  stroke="hsl(var(--muted-foreground))"
-                  label={{ value: "Number of Scans", position: "insideBottom", offset: -5 }}
-                />
-                <YAxis 
-                  dataKey="name" 
-                  type="category" 
-                  width={80} 
-                  className="text-xs" 
-                  stroke="hsl(var(--muted-foreground))"
-                  label={{ value: "Risk Level", angle: -90, position: "insideLeft" }}
-                />
+                <XAxis type="number" className="text-xs" stroke="hsl(var(--muted-foreground))" label={{
+                value: "Number of Scans",
+                position: "insideBottom",
+                offset: -5
+              }} />
+                <YAxis dataKey="name" type="category" width={80} className="text-xs" stroke="hsl(var(--muted-foreground))" label={{
+                value: "Risk Level",
+                angle: -90,
+                position: "insideLeft"
+              }} />
                 <Tooltip contentStyle={{
                 backgroundColor: "hsl(var(--card))",
                 border: "1px solid hsl(var(--border))",
@@ -196,20 +190,11 @@ export function PhishingAnalytics() {
               bottom: 70
             }}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                <XAxis 
-                  dataKey="range" 
-                  type="category" 
-                  className="text-xs" 
-                  stroke="hsl(var(--muted-foreground))" 
-                  angle={-45} 
-                  textAnchor="end" 
-                  height={60} 
-                  label={{
-                    value: "Confidence Score Range (%)",
-                    position: "insideBottom",
-                    offset: -10
-                  }} 
-                />
+                <XAxis dataKey="range" type="category" className="text-xs" stroke="hsl(var(--muted-foreground))" angle={-45} textAnchor="end" height={60} label={{
+                value: "Confidence Score Range (%)",
+                position: "insideBottom",
+                offset: -10
+              }} />
                 <YAxis type="number" className="text-xs" stroke="hsl(var(--muted-foreground))" label={{
                 value: "Number of Scans",
                 position: "insideLeft",
