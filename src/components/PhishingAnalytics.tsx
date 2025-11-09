@@ -185,9 +185,9 @@ export function PhishingAnalytics() {
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={confidenceDistribution} margin={{
               top: 5,
-              right: 30,
-              left: 60,
-              bottom: 70
+      right: 30,
+      left: 60,
+      bottom: 70
             }}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                 <XAxis dataKey="range" type="category" className="text-xs" stroke="hsl(var(--muted-foreground))" angle={-45} textAnchor="end" height={60} label={{
