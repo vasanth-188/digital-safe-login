@@ -197,7 +197,9 @@ export function PhishingAnalytics() {
               }} />
                 <YAxis type="number" className="text-xs" stroke="hsl(var(--muted-foreground))" label={{
                 value: "Number of Scans",
-                position: "insideLeft",
+                position: "outsideLeft",
+                offset: 0, // <-- MODIFICATION: Set offset to 0 or a small positive value if needed for more space
+                style: { textAnchor: "middle" },
                 angle: -90
               }} />
                 <Tooltip contentStyle={{
