@@ -106,12 +106,13 @@ export function PhishingAnalytics() {
                 <XAxis 
                   dataKey="date" 
                   className="text-xs" 
-                  stroke="hsl(var(--muted-foreground))" 
+                  stroke="hsl(var(--muted-foreground))"
+                  label={{ value: "Scan Date", position: "insideBottom", offset: -5 }}
                 />
                 <YAxis 
                   className="text-xs" 
                   stroke="hsl(var(--muted-foreground))"
-                  label={{ value: "Confidence %", angle: -90, position: "insideLeft" }}
+                  label={{ value: "Confidence Score (%)", angle: -90, position: "insideLeft" }}
                 />
                 <Tooltip 
                   contentStyle={{
@@ -150,8 +151,20 @@ export function PhishingAnalytics() {
               bottom: 5
             }}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                <XAxis type="number" className="text-xs" stroke="hsl(var(--muted-foreground))" />
-                <YAxis dataKey="name" type="category" width={80} className="text-xs" stroke="hsl(var(--muted-foreground))" />
+                <XAxis 
+                  type="number" 
+                  className="text-xs" 
+                  stroke="hsl(var(--muted-foreground))"
+                  label={{ value: "Number of Scans", position: "insideBottom", offset: -5 }}
+                />
+                <YAxis 
+                  dataKey="name" 
+                  type="category" 
+                  width={80} 
+                  className="text-xs" 
+                  stroke="hsl(var(--muted-foreground))"
+                  label={{ value: "Risk Level", angle: -90, position: "insideLeft" }}
+                />
                 <Tooltip contentStyle={{
                 backgroundColor: "hsl(var(--card))",
                 border: "1px solid hsl(var(--border))",
@@ -183,11 +196,20 @@ export function PhishingAnalytics() {
               bottom: 70
             }}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                <XAxis dataKey="range" type="category" className="text-xs" stroke="hsl(var(--muted-foreground))" angle={-45} textAnchor="end" height={60} label={{
-                value: "Confidence Score",
-                position: "insideBottom",
-                offset: -10
-              }} />
+                <XAxis 
+                  dataKey="range" 
+                  type="category" 
+                  className="text-xs" 
+                  stroke="hsl(var(--muted-foreground))" 
+                  angle={-45} 
+                  textAnchor="end" 
+                  height={60} 
+                  label={{
+                    value: "Confidence Score Range (%)",
+                    position: "insideBottom",
+                    offset: -10
+                  }} 
+                />
                 <YAxis type="number" className="text-xs" stroke="hsl(var(--muted-foreground))" label={{
                 value: "Number of Scans",
                 position: "insideLeft",
