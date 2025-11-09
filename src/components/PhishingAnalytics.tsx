@@ -186,7 +186,7 @@ export function PhishingAnalytics() {
               <BarChart data={confidenceDistribution} margin={{
               top: 5,
               right: 30,
-              left: 20,
+              left: 60,
               bottom: 70
             }}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
