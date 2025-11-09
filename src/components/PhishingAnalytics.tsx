@@ -125,7 +125,7 @@ export function PhishingAnalytics() {
               }} labelStyle={{
                 color: "hsl(var(--card-foreground))"
               }} />
-                <Legend verticalAlign="bottom" height={36} className="my-px" />
+                
                 <Line type="monotone" dataKey="confidence" stroke={chartColors.high} strokeWidth={2} name="Confidence Score" dot={{
                 fill: chartColors.high
               }} />
@@ -166,7 +166,7 @@ export function PhishingAnalytics() {
               }} labelStyle={{
                 color: "hsl(var(--card-foreground))"
               }} />
-                <Legend />
+                
                 <Bar dataKey="value" name="Number of Scans" radius={[0, 8, 8, 0]}>
                   {riskDistribution.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.fill} />)}
                 </Bar>
